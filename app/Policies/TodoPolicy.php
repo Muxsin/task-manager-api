@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\Todo;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Log\Logger;
 
 class TodoPolicy
 {
@@ -21,7 +21,7 @@ class TodoPolicy
      */
     public function view(User $user, Todo $todo): bool
     {
-        return false;
+        return $user->id === $todo->user->id;
     }
 
     /**
@@ -29,7 +29,7 @@ class TodoPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class TodoPolicy
      */
     public function update(User $user, Todo $todo): bool
     {
-        return false;
+        return $user->id === $todo->user->id;
     }
 
     /**
@@ -45,7 +45,11 @@ class TodoPolicy
      */
     public function delete(User $user, Todo $todo): bool
     {
-        return false;
+        resolve(Logger::class)->info(json_encode([
+            'user' => $user,
+            'todo' => $todo,
+        ]));
+        return $user->id === $todo->user->id;
     }
 
     /**
