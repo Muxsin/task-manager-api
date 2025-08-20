@@ -45,9 +45,9 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function todos(): HasMany
+    public function tasks(): HasMany
     {
-        return $this->hasMany(Todo::class);
+        return $this->hasMany(Task::class);
     }
 
     /**

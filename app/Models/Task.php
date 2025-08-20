@@ -10,13 +10,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property User $user
  * @property string $text
  */
-class Todo extends Model
+class Task extends Model
 {
-    /** @use HasFactory<\Database\Factories\TodoFactory> */
+    /** @use HasFactory<\Database\Factories\TaskFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'text',
+        'title',
+        'description',
+        'due_date',
+        'status'
     ];
 
     public function user(): BelongsTo
